@@ -1,3 +1,5 @@
 FROM nginx
 
-CMD ["echo", "Hello there my name is Yasser"]
+COPY script.sh /script.sh
+
+CMD ["chmod", "+x", "/script.sh"]
