@@ -5,8 +5,8 @@ pipeline {
         stage('Update') {
             steps {
                 parallel(
-                    update_1: echo "A Update code",
-                    update_2: echo "B Update code at the same time"
+                    update_1: echo " Update code_1",
+                    update_2: echo " Update code at the same time"
                 )
             }
         }
