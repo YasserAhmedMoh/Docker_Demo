@@ -18,7 +18,7 @@ pipeline{
 		stage('Build') {
 
 			steps {
-				sh 'docker build -t docker_test/helloworld:latest .'
+				sh 'docker build -t yasser744/helloworld:latest .'
 			}
 		}
 
@@ -32,7 +32,7 @@ pipeline{
 		stage('Push') {
 
 			steps {
-				sh 'docker push docker_test/helloworld:latest'
+				sh 'docker push yasser744/helloworld:latest'
 			}
 		}
 	}
