@@ -1,29 +1,47 @@
-pipeline {
-    agent any
+pipeline{
 
-    stages {
-        stage('Update') {
-            steps {
-                parallel(
-                    update_1: { echo " Update code_1" },
-                    update_2: { echo " Update code at the same time"}
-                )
-            }
-        }
-        stage('Build') {
-            steps {
-                echo 'Building..'
-            }
-        }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
-            }
-        }
-    }
+	agent any
+
+	environment {
+		DOCKERHUB_CREDENTIALS=credentials('yasser_dockerhub')
+	}
+
+	stages {
+	    
+	    stage('gitclone') {
+
+			steps {
+				git 'https://github.com/YasserAhmedMoh/Docker_Demo.git'
+			}
+		}
+
+		stage('Build') {
+
+			steps {
+				sh 'docker build -t docker_test/helloworld:latest .'
+			}
+		}
+
+		stage('Login') {
+
+			steps {
+				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+			}
+		}
+
+		stage('Push') {
+
+			steps {
+				sh 'docker push docker_test/helloworld:latest'
+			}
+		}
+	}
+
+	post {
+		always {
+			sh 'docker logout'
+		}
+	}
+
 }
+
