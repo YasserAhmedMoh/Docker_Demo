@@ -18,7 +18,7 @@ pipeline{
 		stage('Build') {
 
 			steps {
-				sh 'docker build -t yasser744/helloworld:latest .'
+				sh 'docker build -t yasser744/SCM_helloworld:latest .'
 			}
 		}
 
@@ -32,7 +32,7 @@ pipeline{
 		stage('Push') {
 
 			steps {
-				sh 'docker push yasser744/helloworld:latest'
+				sh 'docker push yasser744/SCM_helloworld:latest'
 			}
 		}
 	}
