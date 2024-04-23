@@ -16,16 +16,16 @@ pipeline {
                 //sh "docker login -u ${JFROG_USERNAME} -p ${JFROG_PASSWORD} ${DOCKER_REGISTRY}"
                 //sh "docker login -u $JF_REGISTRY_USER -p $JFROG_PASSWORD"
                 //sh "docker login -u admin -p password http://192.168.96.132:8082/artifactory/devops"
-                sh "docker login -u cadmin -p P@ssw0rd http://192.168.96.132:8082/artifactory/docker_jfrog_repo/"
+                sh "docker login -u cadmin -p P@ssw0rd http://192.168.215.187:8082/artifactory/docker_jfrog_repo/"
 
                 //sh "docker build -f Dockerfile . -t app admin/devops:${BUILD_NUMBER}"
-                sh "docker build -f Dockerfile . -t  192.168.96.132:8082/docker_jfrog_repo/app:${BUILD_NUMBER}"
+                sh "docker build -f Dockerfile . -t  192.168.215.187:8082/docker_jfrog_repo/app:${BUILD_NUMBER}"
             }
         }
         stage('Push Docker Image') {
             steps {
                 //sh "docker push devops:$BUILD_NUMBER"
-                sh "docker push 192.168.96.132:8082/docker_jfrog_repo/app:${BUILD_NUMBER}"
+                sh "docker push 192.168.215.187:8082/docker_jfrog_repo/app:${BUILD_NUMBER}"
                 //sh  "docker.push ${DOCKER_REGISTRY}/${DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER}/${env.BRANCH_NAME}"
             }
         }
